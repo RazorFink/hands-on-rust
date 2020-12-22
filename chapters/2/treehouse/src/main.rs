@@ -10,5 +10,5 @@ fn what_is_your_name() -> String{
 
 fn main() {
     println!("Hello, what's your name?");
-    println!("Well, howdy {}!", what_is_your_name());
+    println!("Well, howdy {:?}!", what_is_your_name());
 }
