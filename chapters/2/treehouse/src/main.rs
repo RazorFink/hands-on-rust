@@ -6,12 +6,11 @@ fn what_is_your_name() -> String{
         .read_line(&mut your_name)
         .expect("Failed to read a line!");
     your_name
+        .trim()
+        .to_lowercase() //return statement w/ no semicolon
 }
 
 fn main() {
     println!("Hello, what's your name?");
-    let name = what_is_your_name()
-        .trim()
-        .to_lowercase();
-    println!("Well, howdy {}!", name);
+    println!("Well, howdy {}!", what_is_your_name());
 }
