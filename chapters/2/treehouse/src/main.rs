@@ -10,5 +10,8 @@ fn what_is_your_name() -> String{
 
 fn main() {
     println!("Hello, what's your name?");
-    println!("Well, howdy {:?}!", what_is_your_name());
+    let name = what_is_your_name()
+        .trim()
+        .to_lowercase();
+    println!("Well, howdy {}!", name);
 }
