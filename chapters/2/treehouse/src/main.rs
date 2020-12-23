@@ -19,6 +19,14 @@ impl Visitor {
     }
 }
 
+#[derive(Debug)]
+enum VisitorAction {
+    Accept,
+    AcceptWithNote { note: String },
+    Refuse,
+    Probation,
+}
+
 fn what_is_your_name() -> String {
     let mut your_name = String::new();
     stdin()
