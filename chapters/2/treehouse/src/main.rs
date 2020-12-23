@@ -4,14 +4,16 @@ use std::io::stdin;
 #[derive(Debug)]
 struct Visitor {
     name: String,
-    greeting: String,
+    action: VisitorAction,
+    age: i8,
 }
 
 impl Visitor {
-    fn new(name: &str, greeting: &str) -> Self {
+    fn new(name: &str, action: VisitorAction, age: i8) -> Self {
         Self {
             name: name.to_lowercase(),
-            greeting: greeting.to_string(),
+            action,
+            age,
         }
     }
     fn extend_greeting(&self) {
@@ -37,10 +39,10 @@ fn what_is_your_name() -> String {
 
 fn main() {
     let mut visitor_list = vec![
-        Visitor::new("bert", "Hi Bert, would you like a sandwich?"),
-        Visitor::new("fred", "Hi Fred, how's it hangin?"),
-        Visitor::new("steve", "Is that Steve?  Steeeeve..."),
-        Visitor::new("carl", "What the fuck're you doing Carl?"),
+        Visitor::new("bert", VisitorAction::Accept, 25),
+        Visitor::new("fred", VisitorAction::AcceptWithNote(note: String::from("Have some juice"), 15),
+        Visitor::new("steve", VisitorAction::Refuse, 85),
+        Visitor::new("carl", VisitorAction::Accept, 21),
     ];
     loop {
         println!("Hello, what's your name?");
