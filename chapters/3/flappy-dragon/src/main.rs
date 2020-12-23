@@ -15,6 +15,17 @@ impl Player {
             velocity: 0.0,
         }
     }
+
+    fn renderer(&mut self, ctx: &mut BTerm) {
+        ctx.set(
+            0,
+            self.y,
+            YELLOW,
+            BLACK,
+            to_cp437('@'),
+        );
+    }
+
 }
 
 enum GameMode {
