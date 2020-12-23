@@ -16,8 +16,20 @@ impl Visitor {
             age,
         }
     }
-    fn extend_greeting(&self) {
-        println!("{}.", self.greeting);
+    fn greet_visitor(&self) {
+        match &self.action {
+            VisitorAction::Accept => println!("Welcome to the treehouse {}", self.name),
+            VisitorAction::AcceptWithNote { note } => {
+                println!("Welcome to the treehouse {}", self.name);
+                println!("{}", note);
+                if self.age < 21 {
+                    println!("Do not serve alcohol to {}.", self.name);
+                }
+            }
+            VisitorAction::Probation => println!("{} is now a probationary member", self.name),
+            VisitorAction::Refuse => println!("Do not let {} in", self.name),
+        }
+
     }
 }
 
@@ -40,7 +52,7 @@ fn what_is_your_name() -> String {
 fn main() {
     let mut visitor_list = vec![
         Visitor::new("bert", VisitorAction::Accept, 25),
-        Visitor::new("fred", VisitorAction::AcceptWithNote(note: String::from("Have some juice"), 15),
+        Visitor::new("fred", VisitorAction::AcceptWithNote{note: String::from("Have some juice")}, 15),
         Visitor::new("steve", VisitorAction::Refuse, 85),
         Visitor::new("carl", VisitorAction::Accept, 21),
     ];
@@ -50,13 +62,13 @@ fn main() {
         let name = what_is_your_name();
         let known_visitor = visitor_list.iter().find(|visitor| visitor.name == name);
         match known_visitor {
-            Some(visitor) => visitor.extend_greeting(),
+            Some(visitor) => visitor.greet_visitor(),
             None => {
                 if name.is_empty() {
                     break;
                 } else {
                     println!("You are not known to us...adding to the list!");
-                    visitor_list.push(Visitor::new(&name, "New friend"));
+                    visitor_list.push(Visitor::new(&name, VisitorAction::Probation, 0));
                 }
             }
         }
