@@ -113,6 +113,19 @@ impl State {
 
     fn play(&mut self, ctx: &mut BTerm) {
         ctx.cls_bg(NAVY);
+        ctx.print(0, 1, format!("Score: {}", self.score));
+
+        self.obstacle.render(ctx, self.player.x);
+
+        if self.player.x > self.obstacle.x {
+            self.score += 1;
+            self.obstacle = Obstacle::new(self.player.x + SCREEN_WIDTH, self.score);
+        }
+
+        if self.player.y > SCREEN_HEIGHT || self.obstacle.hit_obstacle(&self.player) {
+            self.mode = GameMode::End;
+        }
+
         self.frame_time += ctx.frame_time_ms;
         ctx.print(1, 1, self.frame_time);
         if self.frame_time > FRAME_DURATION {
