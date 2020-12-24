@@ -127,7 +127,6 @@ impl State {
         }
 
         self.frame_time += ctx.frame_time_ms;
-        ctx.print(1, 1, self.frame_time);
         if self.frame_time > FRAME_DURATION {
             self.frame_time = 0.0;
             self.player.gravity_and_move();
@@ -145,6 +144,7 @@ impl State {
     fn dead(&mut self, ctx: &mut BTerm) {
         ctx.cls();
         ctx.print_centered(5, "You're Dead");
+        ctx.print_centered(6, format!("Final Score: {}", self.score));
         ctx.print_centered(8, "(P) Play Again");
         ctx.print_centered(9, "(Q) Quit Game");
         if let Some(key) = ctx.key {
@@ -172,8 +172,10 @@ impl State {
 
     fn restart(&mut self) {
         self.player = Player::new(5, 25);
+        self.obstacle = Obstacle::new(SCREEN_WIDTH, 0);
         self.frame_time = 0.0;
         self.mode = GameMode::Playing;
+        self.score = 0;
     }
 
 }
