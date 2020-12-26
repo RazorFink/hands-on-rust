@@ -13,6 +13,14 @@ struct Map {
     pub tiles: Vec<TileType>,
 }
 
+pub fn map_x(index: usize) -> i32 {
+    (index % SCREEN_WIDTH as usize) as i32
+}
+
+pub fn map_y(index: usize) -> i32 {
+    (index / SCREEN_WIDTH as usize) as i32
+}
+
 pub fn map_idx(x: i32, y:i32) -> usize {
     ((y * SCREEN_WIDTH) + x) as usize
 }
