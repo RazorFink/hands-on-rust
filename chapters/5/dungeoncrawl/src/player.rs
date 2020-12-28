@@ -18,7 +18,7 @@ impl Player {
             self.position.x,
             self.position.y,
             WHITE,
-            WHITE,
+            BLACK,
             to_cp437('@'),
         );
     }
