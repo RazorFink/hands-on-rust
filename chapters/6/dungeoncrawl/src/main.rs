@@ -6,6 +6,7 @@ mod components;
 mod map_builder;
 mod player;
 mod spawner;
+mod systems;
 
 pub mod prelude {
     pub use bracket_lib::prelude::*;
@@ -18,6 +19,7 @@ pub mod prelude {
     pub use crate::player::*;
     pub use crate::map_builder::*;
     pub use crate::spawner::*;
+    pub use crate::systems::*;
     pub const SCREEN_WIDTH: i32 = 80;
     pub const SCREEN_HEIGHT: i32 = 50;
     pub const DISPLAY_WIDTH: i32 = SCREEN_WIDTH / 2;
@@ -29,6 +31,7 @@ use prelude::*;
 struct State {
     ecs: World,
     resources: Resources,
+    systems: Schedule,
 }
 
 impl State {
@@ -54,7 +57,8 @@ impl GameState for State {
         ctx.cls();
         ctx.set_active_console(1);
         ctx.cls();
-        //TODO: Execute Systems
+        self.resources.insert(ctx.key);
+        self.systems.execute(&mut self.ecs, &mut self.resources);
         //TODO: Render Draw Buffer
     }
 
