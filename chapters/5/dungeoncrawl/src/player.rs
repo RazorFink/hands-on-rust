@@ -12,4 +12,13 @@ impl Player {
             position
         }
     }
+    pub fn render(&self, ctx: &mut BTerm) {
+        ctx.set(
+            self.position.x,
+            self.position.y,
+            WHITE,
+            WHITE,
+            to_cp437('@'),
+        );
+    }
 }
