@@ -5,6 +5,7 @@ mod camera;
 mod components;
 mod map_builder;
 mod player;
+mod spawner;
 
 pub mod prelude {
     pub use bracket_lib::prelude::*;
@@ -16,6 +17,7 @@ pub mod prelude {
     pub use crate::map::*;
     pub use crate::player::*;
     pub use crate::map_builder::*;
+    pub use crate::spawner::*;
     pub const SCREEN_WIDTH: i32 = 80;
     pub const SCREEN_HEIGHT: i32 = 50;
     pub const DISPLAY_WIDTH: i32 = SCREEN_WIDTH / 2;
@@ -35,6 +37,7 @@ impl State {
         let mut resources = Resources::default();
         let mut rng = RandomNumberGenerator::new();
         let map_builder = MapBuilder::build(&mut rng);
+        spawn_player(&mut ecs, map_builder.player_start);
         resources.insert(Camera::new(map_builder.player_start));
         resources.insert(map_builder.map);
         Self {
