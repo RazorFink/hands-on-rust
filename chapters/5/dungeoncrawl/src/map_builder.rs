@@ -15,7 +15,7 @@ impl MapBuilder {
         self.map.tiles.iter_mut().for_each(|t| *t = tile);
     }
 
-    fn build(rng: &mut RandomNumberGenerator) -> Self {
+    pub fn build(rng: &mut RandomNumberGenerator) -> Self {
         let mut mb = MapBuilder{
             map: Map::new(),
             rooms: Vec::new(),
