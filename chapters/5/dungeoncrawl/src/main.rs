@@ -1,11 +1,13 @@
 #![warn(clippy::all, clippy::pedantic)]
 
 mod map;
+mod camera;
 mod map_builder;
 mod player;
 
 pub mod prelude {
     pub use bracket_lib::prelude::*;
+    pub use crate::camera::*;
     pub use crate::map::*;
     pub use crate::player::*;
     pub use crate::map_builder::*;
@@ -18,6 +20,7 @@ pub mod prelude {
 use prelude::*;
 
 struct State {
+    camera: Camera,
     map: Map,
     player: Player,
 }
@@ -27,6 +30,7 @@ impl State {
         let mut rng = RandomNumberGenerator::new();
         let map_builder = MapBuilder::build(&mut rng);
         Self {
+            camera: Camera::new(map_builder.player_start),
             map: map_builder.map,
             player: Player::new(map_builder.player_start),
         }
