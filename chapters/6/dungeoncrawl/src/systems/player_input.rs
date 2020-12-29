@@ -18,7 +18,7 @@ pub fn player_input(
             VirtualKeyCode::Down => Point::new(0, 1),
             _ => Point::zero()
         };
-        if delta.x != 0 && delta.y != 0 {
+        if delta.x != 0 || delta.y != 0 {
             let mut players = <&mut Point>::query()
                 .filter(component::<Player>());
             players.iter_mut(ecs).for_each(|pos| {
