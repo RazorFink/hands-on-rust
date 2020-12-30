@@ -3,7 +3,7 @@ use crate::prelude::*;
 #[system]
 #[write_component(Point)]
 #[read_component(Point)]
-pub fn random_move(ecs: &mut SubWorld) {
+pub fn random_move(ecs: &mut SubWorld, #[resource] map: &Map) {
     <(&mut Point, &MovingRandomly)>::query()
         .iter(ecs)
         .for_each(|(pos, _)|
