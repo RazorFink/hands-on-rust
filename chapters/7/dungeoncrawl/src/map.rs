@@ -19,7 +19,7 @@ pub fn map_y(index: usize) -> i32 {
     (index / SCREEN_WIDTH as usize) as i32
 }
 
-pub fn map_idx(x: i32, y:i32) -> usize {
+pub fn map_idx(x: i32, y: i32) -> usize {
     ((y * SCREEN_WIDTH) + x) as usize
 }
 
@@ -39,14 +39,10 @@ impl Map {
     }
 
     pub fn can_enter_tile(&self, point: Point) -> bool {
-        self.in_bounds(point)
-            && self.tiles[map_idx(point.x, point.y)] == TileType::Floor
+        self.in_bounds(point) && self.tiles[map_idx(point.x, point.y)] == TileType::Floor
     }
 
     pub fn in_bounds(&self, point: Point) -> bool {
-        point.x >= 0 && point.x < SCREEN_WIDTH 
-            && point.y >= 0 && point.y < SCREEN_HEIGHT
-
+        point.x >= 0 && point.x < SCREEN_WIDTH && point.y >= 0 && point.y < SCREEN_HEIGHT
     }
-
 }

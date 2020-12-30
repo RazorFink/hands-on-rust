@@ -20,11 +20,10 @@ pub fn player_input(
             VirtualKeyCode::Right => Point::new(1, 0),
             VirtualKeyCode::Up => Point::new(0, -1),
             VirtualKeyCode::Down => Point::new(0, 1),
-            _ => Point::zero()
+            _ => Point::zero(),
         };
         if delta.x != 0 || delta.y != 0 {
-            let mut players = <&mut Point>::query()
-                .filter(component::<Player>());
+            let mut players = <&mut Point>::query().filter(component::<Player>());
             players.iter_mut(ecs).for_each(|pos| {
                 let destination = *pos + delta;
                 if map.can_enter_tile(destination) {
@@ -32,8 +31,7 @@ pub fn player_input(
                     camera.on_player_move(destination);
                     *turn_state = TurnState::PlayerTurn;
                 }
-            }
-            );
+            });
         }
     }
 }
