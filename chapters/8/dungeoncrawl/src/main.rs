@@ -68,6 +68,8 @@ impl GameState for State {
         ctx.cls();
         ctx.set_active_console(1);
         ctx.cls();
+        ctx.set_active_console(2);
+        ctx.cls();
         self.resources.insert(ctx.key); // insert replaces any resource of the same type
                                         // Get an Option for resource of type TurnState
                                         // upwrap() / destructure the Option to get a &TurnState
