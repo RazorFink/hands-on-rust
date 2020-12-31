@@ -71,10 +71,10 @@ impl GameState for State {
         ctx.set_active_console(2);
         ctx.cls();
         self.resources.insert(ctx.key); // insert replaces any resource of the same type
-                                        // Get an Option for resource of type TurnState
-                                        // upwrap() / destructure the Option to get a &TurnState
-                                        // Clone the borrowed &TurnState
-        let current_state = self.resources.get::<TurnState>().unwrap().clone();
+        let current_state = self.resources.get::<TurnState>().unwrap().clone(); // Get an Option for resource of type TurnState
+                                                                                // upwrap() / destructure the Option to get a &TurnState
+                                                                                // Clone the borrowed &TurnState
+        self.resources.insert(Point::from_tuple(ctx.mouse_pos()));
         match current_state {
             TurnState::AwaitingInput => self
                 .input_systems

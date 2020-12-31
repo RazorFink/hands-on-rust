@@ -19,7 +19,10 @@ pub fn hud(ecs: &SubWorld) {
     );
     draw_batch.print_color_centered(
         0,
-        format!("Health: {} / {}", player_health.current, player_health.max),
+        format!(
+            " Health: {} / {} ",
+            player_health.current, player_health.max
+        ),
         ColorPair::new(RED, WHITE),
     );
     draw_batch.submit(10000).expect("Batch Error");
