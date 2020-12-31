@@ -15,8 +15,10 @@ pub fn movement(
         if ecs
             .entry_ref(want_move.entity)
             .unwrap()
-            .get_component()::<Player>().is_ok() {
-                camera.on_player_move(want_move.destination);
+            .get_component::<Player>()
+            .is_ok()
+        {
+            camera.on_player_move(want_move.destination);
         }
     }
     commands.remove(*entity);
