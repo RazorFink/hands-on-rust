@@ -36,12 +36,14 @@ pub fn random_move(ecs: &mut SubWorld, commands: &mut CommandBuffer) {
                 }
                 attacked = true;
             });
-        commands.push((
-            (),
-            WantsToMove {
-                entity: *entity,
-                destination,
-            },
-        ));
+        if !attacked {
+            commands.push((
+                (),
+                WantsToMove {
+                    entity: *entity,
+                    destination,
+                },
+            ));
+        }
     });
 }
