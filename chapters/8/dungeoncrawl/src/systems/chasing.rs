@@ -9,4 +9,7 @@ pub fn chasing(#[resource] map: &Map, ecs: &SubWorld, commands: &mut CommandBuff
     let mut movers = <(Entity, &Point, &ChasingPlayer)>::query();
     let mut positions = <(Entity, &Point, &Health)>::query();
     let mut player = <(&Point, &Player)>::query();
+
+    let player_pos = player.iter(ecs).nth(0).unwrap();
+    let player_idx = map.map_idx(player_pos.x, player_pos.y);
 }
