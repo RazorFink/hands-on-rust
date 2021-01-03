@@ -45,6 +45,20 @@ impl Map {
     pub fn in_bounds(&self, point: Point) -> bool {
         point.x >= 0 && point.x < SCREEN_WIDTH && point.y >= 0 && point.y < SCREEN_HEIGHT
     }
+
+    fn valid_exit(&self, loc: Point, delta: Point) -> Option<usize> {
+        let destination = loc + delta;
+        if self.in_bounds(destination) {
+            if self.can_enter_tile(destination) {
+                let idx = self.point2d_to_index(destination);
+                Some(idx)
+            } else {
+                None
+            }
+        } else {
+            None
+        }
+    }
 }
 
 impl Algorithm2D for Map {
