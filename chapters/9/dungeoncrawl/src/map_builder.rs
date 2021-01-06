@@ -19,6 +19,7 @@ impl MapBuilder {
             map: Map::new(),
             rooms: Vec::new(),
             player_start: Point::zero(),
+            amulet_start: Point::zero(),
         };
         mb.fill(TileType::Wall);
         mb.build_random_rooms(rng);
@@ -30,6 +31,16 @@ impl MapBuilder {
             &vec![mb.map.point2d_to_index(mb.player_start)],
             &mb.map,
             1024.0,
+        );
+        mb.amulet_start = mb.map.index_to_point2d(
+            dijkstra_map
+                .map
+                .iter()
+                .enumerate()
+                .filter(|(_, dist)| *dist < &std::f32::MAX)
+                .max_by(|a, b| a.1.partial_cmp(b.1).unwrap())
+                .unwrap()
+                .0,
         );
         mb
     }
